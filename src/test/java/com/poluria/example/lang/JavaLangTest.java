@@ -1,8 +1,11 @@
-package com.poluria.test;
+package com.poluria.example.lang;
 
 import org.junit.Test;
 
+import java.util.Arrays;
+
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertThat;
 
 public class JavaLangTest {
@@ -37,6 +40,27 @@ public class JavaLangTest {
 
         Interface obj3 = obj;
         assertThat(obj3.getClass().getSimpleName(), is("Class"));
+    }
+
+    @Test
+    public void arrayHashCode() {
+        byte[] arr1 = "test".getBytes();
+        byte[] arr2 = "test".getBytes();
+
+        assertThat(arr1.hashCode(), not(arr2.hashCode()));
+
+        assertThat(Arrays.hashCode(arr1), is(Arrays.hashCode(arr2)));
+    }
+
+    @Test
+    public void arrayEquals() {
+        byte[] arr1 = "test".getBytes();
+        byte[] arr2 = "test".getBytes();
+
+        assertThat(arr1.equals(arr2), is(false));
+        assertThat(arr2.equals(arr1), is(false));
+
+        assertThat(Arrays.equals(arr1, arr2), is(true));
     }
 
     private interface Interface {
